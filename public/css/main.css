@@ -1,5 +1,6 @@
 @import url("/css/nav.css");
 @import url("/css/variables.css");
+@import url("/css/admin.css");
 
 *{
     padding: 0;
@@ -12,4 +13,12 @@
 body{
     height: 100vh;
     width: 100%;
+    background-color: var(--backgroundColor);
+}
+
+
+
+@font-face {
+    font-family: "playfair";
+    src: url("/fonts/PlayfairDisplay-Italic-VariableFont_wght.ttf");
 }
