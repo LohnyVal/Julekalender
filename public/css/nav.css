@@ -1,9 +1,36 @@
 nav{
-    height: 10%;
+    height: 6%;
     width: 100%;
-    background-color: lightgrey;
+    background-color: var(--navbarColor);
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
+ nav ul li{
+    list-style-type: none;
+ }
+
+ nav ul li a{
+    color: rgb(224, 224, 48);
+    font-size: 1.3rem;
+    text-decoration: none;
+ }
+
+ nav ul li a:hover{
+    text-decoration: underline;
+ }
+ 
+
+ .nav-left{
+    margin-left: 20px;
+ }
+ 
+.nav-right{
+    display: flex;
+    margin-right: 20px;
+    gap: 20px;
+}
+
+
+
 
