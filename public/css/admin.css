@@ -79,20 +79,8 @@
 .daysContainer a:hover .days::after{
     content: "Åpne";
     font-size: 2rem;
-    animation: change infinite 2000ms;
 }
 
 
 
 
-@keyframes change {
-    0%{
-        transform: scale(1);
-    }
-    50%{
-        transform: scale(1.2);
-    }
-    100%{
-        transform: scale(1);
-    }
-}
