@@ -13,9 +13,11 @@ app.use(express.static("public"));
 
 
 app.get("/", (req, res) => {
-    res.render("index")
+    const calendar_array = Array.from({length: 24}, (_, i) => i + 1);
+    res.render("index", {calendar_array})
 })
 
+app.get("/calendar/:id")
 
 
 app.listen(process.env.PORT);
