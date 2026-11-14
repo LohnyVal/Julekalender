@@ -1,4 +1,5 @@
 @import url("/css/nav.css");
+@import url("/css/variables.css");
 
 *{
     padding: 0;
