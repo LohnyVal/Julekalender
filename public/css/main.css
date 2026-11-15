@@ -1,6 +1,7 @@
 @import url("/css/nav.css");
 @import url("/css/variables.css");
 @import url("/css/admin.css");
+@import url("/css/registerUser.css");
 
 *{
     padding: 0;
