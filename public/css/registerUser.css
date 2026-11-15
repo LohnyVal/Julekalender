@@ -1,0 +1,40 @@
+.register-main{
+    height: 94%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.register-wrapper{
+    background-color: white;
+    width: 30%;
+    height: 30%;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.register-form{
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+}
+
+.register-form h1{
+    font-size: 3rem;
+}
+
+.register-form div{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.register-form button{
+    width: 50%;
+}
