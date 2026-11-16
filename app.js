@@ -37,18 +37,19 @@ app.use((req, res, next) =>{
 
 app.get("/", (req, res) => {
     const calendar_array = Array.from({length: 24}, (_, i) => i + 1);
-    res.render("index", {calendar_array})
+    const today = new Date().getDate();
+    res.render("index", {calendar_array, today})
 })
 
 app.get("/calendar/:id", (req, res) =>{
 
-    const dag = Number(req.params.id);
-    const idag = new Date().getDate();
+    const day = Number(req.params.id);
+    const today = new Date().getDate();
 
-    if(dag < idag){
+    if(day < today){
         return res.send("Kan ikke åpne tidligere uker!")
     }
-    if(dag > idag){
+    if(day > today){
         return res.send("Kan ikke åpne fremtidige luker")
     }
 
