@@ -1,7 +1,8 @@
 @import url("/css/nav.css");
 @import url("/css/variables.css");
-@import url("/css/admin.css");
+@import url("/css/calendar.css");
 @import url("/css/registerUser.css");
+@import url("/css/dashboard.css");
 
 *{
     padding: 0;

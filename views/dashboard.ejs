@@ -1,0 +1,102 @@
+<%- include('partials/head') %>
+<body>
+    <%- include('partials/nav') %>
+    <main class="dashboard-main">
+        <div class="dashboard-top">
+            <h1>Dashboard</h1>
+            <h3>Hei, <%= username %></h3>
+        </div>
+        <div class="dashboard-middle">
+            <div class="data-div box">
+                <div class="data-div-top">
+                    <h2>Oversikt</h2>
+                </div>
+                <div class="data-overview-div">
+                    <div class="users-amount">
+                        <h3><%= userCount %></h3>
+                        <p>Deltagere</p>
+                    </div>
+                    <div class="answers-amount">
+                        <h3>35</h3>
+                        <p>Antall svar</p>
+                    </div>
+                    <div class="awaits-correction">
+                        <h3>35</h3>
+                        <p>Venter svar</p>
+                    </div>
+                    <div class="day-count">
+                        <h3>10</h3>
+                        <p>Luke</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="answer-div box">
+                <div class="answer-div-top">
+                    <h2>Innsendte svar</h2>
+                </div>
+                <div class="answer-div-result">
+                    <div class="filter-options-div">
+                        <form action="" method="post">
+                            <select name="filter" id="filter">
+                                <option value="all">Alle</option>
+                                <option value="correct">Riktig</option>
+                                <option value="wrong">Feil</option>
+                                <option value="awaits">Venter</option>
+                            </select>
+                        </form>
+                    </div>
+                    <div class="user-results">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="question-div box">
+                <div class="question-div-top">
+                    <h2>Legg til spørsmål</h2>
+                </div>
+                <div class="quesion-div-form">
+                    <form action="/admin/question" method="post">
+                        <label for="day">Luke (1-24)</label>
+                        <input type="number" name="day" id="day" min="1" max="24" required>
+
+                        <label for="type">Type</label>
+                        <select name="type" id="type">
+                            <option value="multiple">Flervalg</option>
+                            <option value="freetext">Fritekst</option>
+                        </select>
+
+                        <label for="question">Skriv inn spørsmål</label>
+                        <textarea name="question" id="question" required></textarea>
+
+                        <label for="options">Svaralternativer (ett per linje)</label>
+                        <textarea name="options" id="options"></textarea>
+
+                        <label for="media">Bilde eller video (lenke)</label>
+                        <input type="text" name="media" id="media">
+
+                        <button type="submit">Lag spørsmål</button>
+                    </form>
+                </div>
+            </div>
+            <div class="pull-random-winner-div box">
+                <div class="pull-random-winner-div-top">
+                    <h2>Trekk vinner</h2>
+                </div>
+                <div class="pull-random-winner">
+                   <form action="" method="post">
+                    <h3>Trekk en tilfeldig vinner</h3>
+                    <button>Trekk</button>
+                   </form>
+                </div>
+                
+            </div>
+            <div class="user-list-div box">
+                <div class="question-div-top">
+                    <h2>Brukere</h2>
+                </div>
+                
+            </div>
+        </div>
+    </main>
+</body>
