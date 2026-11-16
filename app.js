@@ -48,6 +48,38 @@ app.get("/registerUser", (req, res) =>{
 })
 
 
+app.get("/dashboard", async (req, res) => {
+    const token = req.cookies.token;
+    if (!token) {
+        return res.redirect("/")
+    }
+
+    jwt.verify(token, process.env.SECRET_JWT, async (err, payload) => {
+        if (err) {
+            return res.redirect("/")
+        }
+
+        const user = await User.findById(payload.id).select("username role");
+        if (!user) {
+            return res.redirect("/");
+        }
+
+        if(user.role !== "teacher"){
+            return res.redirect("/")
+        }
+       const userCount = await User.countDocuments({role: {$ne: "teacher"}});
+
+        res.render("dashboard", { userCount, username: user.username.slice(0,-3) })
+    })
+})
+
+
+app.get("/logout", (req, res) =>{
+    res.clearCookie("token");
+    res.redirect("/registerUser")
+})
+
+
 app.post("/registerUser", async (req, res) =>{
     const {email} = req.body;
 
@@ -77,5 +109,7 @@ app.post("/registerUser", async (req, res) =>{
 
     res.redirect("/")
 })
+
+
 
 app.listen(process.env.PORT);

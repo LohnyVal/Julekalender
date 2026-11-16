@@ -1,0 +1,111 @@
+.dashboard-main{
+    height: 80vh;
+    width: 100%;
+}
+
+.dashboard-top{
+    display: flex;
+    align-items: center;
+    height: 10%;
+    /* background-color: white;  */
+    justify-content: space-between;
+}
+
+.dashboard-top h1   {
+    font-size: 3.5rem;
+    margin-left: 25px;
+    color: white;
+}
+
+.dashboard-top h3  {
+    font-size: 2.5rem;
+    margin-right: 25px;
+    color: white;
+}
+
+.dashboard-middle{
+    /* background-color: green; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 35px;
+    height: 90%;
+    margin-top: 10px;
+}
+
+
+.box {
+  width: calc(48% - 5px); 
+  height: calc(48% - 5px);
+  box-sizing: border-box; 
+  background-color: white; 
+  border-radius: 10px; 
+}
+
+.data-overview-div{
+    display: flex;
+    
+}
+
+.data-div-top{
+    /* background-color: white; */
+    height: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.data-overview-div{
+    height: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    /* background-color: orange; */
+}
+
+.users-amount, .answers-amount, .awaits-correction, .day-count{
+    background-color: rgba(0, 0, 0, 0.256);
+    min-width: 200px;
+    height: 100px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+
+.data-div-top h2, .answer-div-top h2, .question-div-top h2, .pull-random-winner-div-top h2{
+    font-size: 2rem;
+}
+
+.data-div-top, .question-div-top, .pull-random-winner-div-top{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 15%;
+}
+
+.users-amount h3, .answers-amount h3, .awaits-correction h3, .day-count h3{
+    font-size: 1.6rem;
+}
+
+.quesion-div-form{
+    background-color: orange;
+    
+}
+
+.quesion-div-form form{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+.quesion-div-form form label, .quesion-div-form form input, .quesion-div-form form select, .quesion-div-form form textarea, .quesion-div-form form button{
+    width: 50%;
+}
+
