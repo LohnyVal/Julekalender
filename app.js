@@ -4,7 +4,8 @@ const jwt = require("jsonwebtoken")
 const cookieParser = require("cookie-parser");
 require("dotenv").config();
 
-const User = require("./models/User")
+const User = require("./models/User");
+
 
 const mongodb = mongoose.connect(process.env.MONGODB)
 
@@ -17,12 +18,39 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.static("public"));
 app.use(cookieParser());
 
+app.use((req, res, next) =>{
+    res.locals.loggedIn = false;
+    res.locals.currentUser = null
+    const token = req.cookies.token;
+    if(!token){
+        return next()
+    }
+
+    jwt.verify(token, process.env.SECRET_JWT, (err, payload) =>{
+        if(!err){
+            res.locals.loggedIn = true;
+            res.locals.currentUser = payload.username
+        }
+        return next()
+    })
+})
+
 app.get("/", (req, res) => {
     const calendar_array = Array.from({length: 24}, (_, i) => i + 1);
     res.render("index", {calendar_array})
 })
 
 app.get("/calendar/:id", (req, res) =>{
+
+    const dag = Number(req.params.id);
+    const idag = new Date().getDate();
+
+    if(dag < idag){
+        return res.send("Kan ikke åpne tidligere uker!")
+    }
+    if(dag > idag){
+        return res.send("Kan ikke åpne fremtidige luker")
+    }
 
     const token = req.cookies.token;
     if(!token){

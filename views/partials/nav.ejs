@@ -5,6 +5,11 @@
     <ul class="nav-right">
         <li><a href="/dashboard">Dashboard</a></li>
         <li><a href="">Om kalenderen</a></li>
-        <li><a href="/logout">Log ut</a></li>
+        <% if (loggedIn) { %>
+            <li><a href="/logout">Logg ut</a></li>
+        <% } else { %>
+            <li><a href="/registerUser">Logg inn</a></li>
+        <% } %>
+
     </ul>
 </nav>
