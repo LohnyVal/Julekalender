@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser");
 require("dotenv").config();
 
 const User = require("./models/User");
+const Question = require("./models/Questions")
 
 
 const mongodb = mongoose.connect(process.env.MONGODB)
@@ -79,6 +80,7 @@ app.get("/registerUser", (req, res) =>{
 
 app.get("/dashboard", async (req, res) => {
     const token = req.cookies.token;
+    const today = new Date().getDate();
     if (!token) {
         return res.redirect("/")
     }
@@ -97,8 +99,10 @@ app.get("/dashboard", async (req, res) => {
             return res.redirect("/")
         }
        const userCount = await User.countDocuments({role: {$ne: "teacher"}});
+       const users = await User.find({ role: { $ne: "teacher" } }).select("username email").lean();
+       
 
-        res.render("dashboard", { userCount, username: user.username.slice(0,-3) })
+        res.render("dashboard", { userCount, users, username: user.username, today });
     })
 })
 
@@ -138,7 +142,6 @@ app.post("/registerUser", async (req, res) =>{
 
     res.redirect("/")
 })
-
 
 
 app.listen(process.env.PORT);
