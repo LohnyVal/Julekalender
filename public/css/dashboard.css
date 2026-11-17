@@ -40,6 +40,7 @@
   box-sizing: border-box; 
   background-color: white; 
   border-radius: 10px; 
+  overflow-x: scroll;
 }
 
 .data-overview-div{
@@ -77,11 +78,11 @@
 }
 
 
-.data-div-top h2, .answer-div-top h2, .question-div-top h2, .pull-random-winner-div-top h2{
+.data-div-top h2, .answer-div-top h2, .question-div-top h2, .pull-random-winner-div-top h2, .user-div-top h2{
     font-size: 2rem;
 }
 
-.data-div-top, .question-div-top, .pull-random-winner-div-top{
+.data-div-top, .question-div-top, .pull-random-winner-div-top, .user-div-top{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -109,3 +110,33 @@
     width: 50%;
 }
 
+.users-div{
+    border-bottom: 1px solid rgba(0, 0, 0, 0.303);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.user-left{
+    display: flex;
+    gap: 20px;
+    margin-right: 10px;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.users-div h4{
+    margin-left: 10px;
+}
+
+.user-left span{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background-color: black;
+    color: white;
+    border-radius: 50%;
+}
