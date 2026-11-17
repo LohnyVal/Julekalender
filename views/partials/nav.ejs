@@ -6,6 +6,7 @@
         <li><a href="/dashboard">Dashboard</a></li>
         <% if (loggedIn) { %>
             <li><a href="/logout">Logg ut</a></li>
+            <li class="usericon"><%= currentUser.charAt(0).toUpperCase() %></li>
         <% } else { %>
             <li><a href="/registerUser">Logg inn</a></li>
         <% } %>
