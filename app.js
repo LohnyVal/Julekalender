@@ -63,6 +63,7 @@ app.get("/calendar/:id", (req, res) =>{
         if(err){
             return res.redirect("/registerUser")
         }
+
         const id = Number(req.params.id)
         if(!Number.isInteger(id) || id < 1 || id > 24){
             res.status(404).send(("Denne luken finnes ikke! Det finnes bare luker fra 1 til 24"))
@@ -80,7 +81,6 @@ app.get("/registerUser", (req, res) =>{
 
 app.get("/dashboard", async (req, res) => {
     const token = req.cookies.token;
-    const today = new Date().getDate();
     if (!token) {
         return res.redirect("/")
     }
@@ -99,10 +99,10 @@ app.get("/dashboard", async (req, res) => {
             return res.redirect("/")
         }
        const userCount = await User.countDocuments({role: {$ne: "teacher"}});
-       const users = await User.find({ role: { $ne: "teacher" } }).select("username email").lean();
+       const users = await User.find().select("username email role").lean();
        
 
-        res.render("dashboard", { userCount, users, username: user.username, today });
+        res.render("dashboard", { userCount, users, username: user.username});
     })
 })
 

@@ -25,7 +25,7 @@
                         <p>Venter svar</p>
                     </div>
                     <div class="day-count">
-                        <h3><%= today %></h3>
+                        <h3>46</h3>
                         <p>Luke</p>
                     </div>
                 </div>
@@ -119,6 +119,7 @@
                 <% users.forEach(user => { %>
                     <div class="users-div">
                         <h4><%= user.username %></h4>
+                        <p>Rolle: <%= user.role %></p>
                         <div class="user-left">
                             <p><%= user.email %></p>
                             <span class="profile_of_user"><%= user.username.charAt(0).toUpperCase() %></span>
