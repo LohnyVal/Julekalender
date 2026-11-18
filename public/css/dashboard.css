@@ -35,8 +35,7 @@
 
 
 .box {
-  width: calc(48% - 5px); 
-  height: calc(48% - 5px);
+  min-width: 800px;
   box-sizing: border-box; 
   background-color: white; 
   border-radius: 10px; 
@@ -139,4 +138,20 @@
     background-color: black;
     color: white;
     border-radius: 50%;
+}
+
+
+
+
+
+@media (max-width: 600px){
+    .box{
+        width: 300px;
+        height: 600px,
+    }
+    .users-amount, .answers-amount, .awaits-correction, .day-count{
+        width: px;
+        height: 30px;
+    }
+    
 }

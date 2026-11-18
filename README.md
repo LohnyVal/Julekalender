@@ -5,9 +5,19 @@ Julekalenderen er en skole kalender hvor hver luke inneholder et spørsmål bruk
 Som bruker på denne nettsiden eller webapplikasjonen kan du åpner en luke hver dag hvor du svarer på sprøsmål som er gitt til den enklete luken. Som bruker og administrator må man være inn logget med en @afk mail (skole mail). Administrator har et dashboard hvor lærere kan legge til spørsmål, få en oversikt over alle brukere, svar på alle sprøsmål og evaluerer om et svar er riktig eller galt. Admin vil kunen trykke på generer vinner, hvor en tilfeldig person som er svart rett vil få en premiere eller er vinner for den dagen. 
 
 
-## Teknologier: Hvilke teknologier, rammeverk og verktøy har du brukt?
-I dette julekalender prosjektet har jeg brukt følgende teknologier:
-- Node.js, Express, EJS, MongoDB, HTML, CSS, JavsScript, Git og GitHub og Github Projects og linux-server
+## Teknologier
+I dette julekalenderprosjektet har jeg brukt følgende teknologier:
+- Node.js
+- Express
+- EJS (Embedded JavaScript) lager HTML-sidene av dataene fra serveren
+- MongoDB: Dette er databasen som prosjektet bruker
+- CSS: Cascading Style Sheets er det språket som kan gi HTML elemnter styling som farger, skrifts størrelse og masse annet
+- JavaScript: Er programmeringsspråket som er brukt for å kjøre express serveren
+- Git og GitHub: 
+- HTML
+- GitHub Projects: Dette er et sted hvor man organiserer arbiede sitt og plannlegger mens man går igjennom prosjektet
+- linux-server: en datamskin som i dette tilfelle er en vitutell maksin som kjører et oprativsystem. I dette prosjektet er det ubuntu liver server som blir tatt i bruk
+- pm2: kjører webapplikasjonen
 
 
 ## Installasjon: Hvordan kloner og installerer man prosjektet, og hvordan installeres nødvendige dependencies?
@@ -31,3 +41,13 @@ I denne løsningen så registerer vi bare brukere uten at de trenger å ha en pa
 
 
 ## Videre utvikling: Hvilke funksjoner eller forbedringer kunne vært aktuelle å implementere senere?
+
+
+
+
+
+
+
+
+
+
