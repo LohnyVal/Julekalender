@@ -44,62 +44,22 @@
                                 <option value="wrong">Feil</option>
                                 <option value="awaits">Venter</option>
                             </select>
+                            <select name="days" id="">
+                            <% for (let i = 0; i < 24; i++) { %>
+                                <option value="<%= i %>"><%= i + 1 %></option>
+                            <% } %>
+                            </select>
                         </form>
                     </div>
                     <div class="user-results">
-                        
+                        <h3>Andreas</h3>
+                        <p>Luke: </p>
+                        <button>Riktig</button>
+                        <button>Feil</button>
                     </div>
                 </div>
             </div>
-            <div class="question-div box">
-                <div class="question-div-top">
-                    <h2>Legg til spørsmål</h2>
-                </div>
-                <div class="quesion-div-form">
-                    <form action="/question" method="post">
-                        <label for="day">Luke (1-24)</label>
-                        <input type="number" name="day" id="day" min="1" max="24" required>
 
-                        <label for="type">Type</label>
-                        <select name="type" id="type">
-                            <option value="multiple">Flervalg</option>
-                            <option value="freetext">Fritekst</option>
-                        </select>
-
-                        <div class="multiple-choice-div">
-                            <div class="multiple-choice-row">
-                                <label for="">A</label>
-                                <input type="radio" name="correct" value="0" checked>
-                                <input type="text" name="question" placeholder="Svar A">
-                            </div>
-                            <div class="multiple-choice-row">
-                                <label for="correct-b">B</label>
-                                <input type="radio" name="correct" value="1" id="correct-b">
-                                <input type="text" name="question" placeholder="Svar B">
-                            </div>
-                            <div class="multiple-choice-row">
-                                <label for="correct-c">C</label>
-                                <input type="radio" name="correct" value="2" id="correct-c">
-                                <input type="text" name="question" placeholder="Svar C">
-                            </div>
-                            <div class="multiple-choice-row">
-                                <label for="correct-d">D</label>
-                                <input type="radio" name="correct" value="3" is="correct-d">
-                                <input type="text" name="question" placeholder="Svar D">
-                            </div>
-                        </div>
-                        <div class="freetext-choice-div">
-                            <label for="">Flervalg sprøsmål</label>
-                            <textarea name="answer" id=""></textarea>
-                        </div>
-
-                        <label for="media">Bilde eller video (lenke)</label>
-                        <input type="text" name="media" id="media">
-
-                        <button>Lag spørsmål</button>
-                    </form>
-                </div>
-            </div>
             <div class="pull-random-winner-div box">
                 <div class="pull-random-winner-div-top">
                     <h2>Trekk vinner</h2>
