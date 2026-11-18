@@ -49,3 +49,15 @@ nav{
 
 
 
+@media (max-width: 600px){
+   body{
+      text-align: center;
+   }
+   nav ul li a{
+      font-size: 1rem;
+   }
+   .usericon{
+      height: 40px;
+      width: 40px;
+   }
+}

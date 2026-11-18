@@ -91,3 +91,11 @@
 
 
 
+@media (max-width: 600px){
+    .days{
+        height: 50px;
+        width: 50px;
+        font-size: 2rem;
+    }
+    
+}
