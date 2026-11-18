@@ -44,22 +44,22 @@ app.get("/", (req, res) => {
 
 app.get("/calendar/:id", (req, res) =>{
 
-    const day = Number(req.params.id);
-    const today = new Date().getDate();
+    // const day = Number(req.params.id);
+    // const today = new Date().getDate();
 
-    if(day < today){
-        return res.send("Kan ikke åpne tidligere uker!")
-    }
-    if(day > today){
-        return res.send("Kan ikke åpne fremtidige luker")
-    }
+    // if(day < today){
+    //     return res.send("Kan ikke åpne tidligere uker!")
+    // }
+    // if(day > today){
+    //     return res.send("Kan ikke åpne fremtidige luker")
+    // }
 
     const token = req.cookies.token;
     if(!token){
         return res.redirect("/registerUser");
     }
 
-    jwt.verify(token, process.env.SECRET_JWT, (err, payload) =>{
+    jwt.verify(token, process.env.SECRET_JWT, async (err, payload) =>{
         if(err){
             return res.redirect("/registerUser")
         }
@@ -68,8 +68,14 @@ app.get("/calendar/:id", (req, res) =>{
         if(!Number.isInteger(id) || id < 1 || id > 24){
             res.status(404).send(("Denne luken finnes ikke! Det finnes bare luker fra 1 til 24"))
         }
+
+        const quiz = await mongoose.connection.db.collection("quizzes").findOne({_id: "christmas-quiz"});
+        const question = quiz.questions.find(q => q.id === id);
+
+
+
     
-        res.render("calendar", {id, username: payload.username})
+        res.render("calendar", {id, username: payload.username, q:question})
     });
 })
 
@@ -81,6 +87,7 @@ app.get("/registerUser", (req, res) =>{
 
 app.get("/dashboard", async (req, res) => {
     const token = req.cookies.token;
+    const today = new Date().getDate()
     if (!token) {
         return res.redirect("/")
     }
@@ -102,7 +109,7 @@ app.get("/dashboard", async (req, res) => {
        const users = await User.find().select("username email role").lean();
        
 
-        res.render("dashboard", { userCount, users, username: user.username});
+        res.render("dashboard", { userCount, users, username: user.username, today});
     })
 })
 
