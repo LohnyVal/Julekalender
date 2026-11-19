@@ -105,11 +105,11 @@ app.get("/dashboard", async (req, res) => {
         if(user.role !== "teacher"){
             return res.redirect("/")
         }
-       const userCount = await User.countDocuments({role: {$ne: "teacher"}});
-       const users = await User.find().select("username email role").lean();
-       
+        const userCount = await User.countDocuments({role: {$ne: "teacher"}});
+        const users = await User.find().select("username email role").lean();
+        const answers = await mongoose.connection.db.collection("answers").find().toArray();
 
-        res.render("dashboard", { userCount, users, username: user.username, today});
+        res.render("dashboard", { userCount, users, username: user.username, today, answers });
     })
 })
 

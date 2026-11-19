@@ -9,7 +9,7 @@ const questionSchema = new mongoose.Schema({
         max: 24
     },
     type: {
-        type: String,
+        type: String,   
         enum: ["multiple", "freetext"],
         required: true
     },
