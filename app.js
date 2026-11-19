@@ -45,15 +45,15 @@ app.get("/", (req, res) => {
 
 app.get("/calendar/:id", (req, res) =>{
 
-    // const day = Number(req.params.id);
-    // const today = new Date().getDate();
-
-    // if(day < today){
-    //     return res.send("Kan ikke åpne tidligere uker!")
-    // }
-    // if(day > today){
-    //     return res.send("Kan ikke åpne fremtidige luker")
-    // }
+    const day = Number(req.params.id);
+    const today = new Date().getDate();
+    
+    if(day < today){
+        return res.send("Kan ikke åpne tidligere uker!")
+    }
+    if(day > today){
+        return res.send("Kan ikke åpne fremtidige luker")
+    }
 
     const token = req.cookies.token;
     if(!token){
