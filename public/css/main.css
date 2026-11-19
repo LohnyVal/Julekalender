@@ -3,6 +3,7 @@
 @import url("/css/calendar.css");
 @import url("/css/registerUser.css");
 @import url("/css/dashboard.css");
+@import url("/css/answers.css");
 
 *{
     padding: 0;

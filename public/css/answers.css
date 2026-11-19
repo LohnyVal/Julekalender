@@ -1,0 +1,40 @@
+.calendar-main{
+    height: 94vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calendar-wrapper-video, .calendar-wrapper-multiple, .calendar-wrapper-open{
+    overflow: hidden;
+}
+
+.calendar-wrapper-multiple{
+    width: 80%;
+    height: 80%;
+    background-color: white;
+    border-radius: 20px;
+}
+
+
+.calendar-wrapper-open{
+    width: 80%;
+    height: 80%;
+    background-color: white;
+    border-radius: 20px;
+
+}
+
+.calendar-wrapper-video{
+    width: 80%;
+    height: 80%;
+    background-color: white;
+    border-radius: 20px;
+}
+
+
+iframe{
+    border-radius: 20px;
+}
+

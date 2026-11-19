@@ -6,6 +6,7 @@ require("dotenv").config();
 
 const User = require("./models/User");
 const Question = require("./models/Questions")
+const Answer = require("./models/Answer")
 
 
 const mongodb = mongoose.connect(process.env.MONGODB)
@@ -44,22 +45,22 @@ app.get("/", (req, res) => {
 
 app.get("/calendar/:id", (req, res) =>{
 
-    const day = Number(req.params.id);
-    const today = new Date().getDate();
+    // const day = Number(req.params.id);
+    // const today = new Date().getDate();
 
-    if(day < today){
-        return res.send("Kan ikke åpne tidligere uker!")
-    }
-    if(day > today){
-        return res.send("Kan ikke åpne fremtidige luker")
-    }
+    // if(day < today){
+    //     return res.send("Kan ikke åpne tidligere uker!")
+    // }
+    // if(day > today){
+    //     return res.send("Kan ikke åpne fremtidige luker")
+    // }
 
     const token = req.cookies.token;
     if(!token){
         return res.redirect("/registerUser");
     }
 
-    jwt.verify(token, process.env.SECRET_JWT, (err, payload) =>{
+    jwt.verify(token, process.env.SECRET_JWT, async (err, payload) =>{
         if(err){
             return res.redirect("/registerUser")
         }
@@ -68,8 +69,13 @@ app.get("/calendar/:id", (req, res) =>{
         if(!Number.isInteger(id) || id < 1 || id > 24){
             res.status(404).send(("Denne luken finnes ikke! Det finnes bare luker fra 1 til 24"))
         }
+
+        const quiz = await mongoose.connection.db.collection("quizzes").findOne({_id: "christmas-quiz"});
+        const question = quiz.questions.find(q => q.id === id);
+
+
     
-        res.render("calendar", {id, username: payload.username})
+        res.render("calendar", {id, username: payload.username, q:question})
     });
 })
 
@@ -81,6 +87,7 @@ app.get("/registerUser", (req, res) =>{
 
 app.get("/dashboard", async (req, res) => {
     const token = req.cookies.token;
+    const today = new Date().getDate()
     if (!token) {
         return res.redirect("/")
     }
@@ -98,11 +105,11 @@ app.get("/dashboard", async (req, res) => {
         if(user.role !== "teacher"){
             return res.redirect("/")
         }
-       const userCount = await User.countDocuments({role: {$ne: "teacher"}});
-       const users = await User.find().select("username email role").lean();
-       
+        const userCount = await User.countDocuments({role: {$ne: "teacher"}});
+        const users = await User.find().select("username email role").lean();
+        const answers = await mongoose.connection.db.collection("answers").find().toArray();
 
-        res.render("dashboard", { userCount, users, username: user.username});
+        res.render("dashboard", { userCount, users, username: user.username, today, answers });
     })
 })
 
@@ -138,6 +145,41 @@ app.post("/registerUser", async (req, res) =>{
     res.cookie("token", token, {
         maxAge: 30 * 24 * 60 * 60 * 1000
     })
+
+
+    res.redirect("/")
+})
+
+
+
+app.post("/calendar/:id/:type", async (req, res) =>{
+    const {answer} = req.body;
+    console.log(answer)
+
+    const day = req.params.id;
+    const type = req.params.type;
+
+    console.log(type);
+    const token = req.cookies.token;
+    console.log(token, day)
+    const user = await jwt.decode(token);
+    const userId = user.id;
+    const username = user.username;
+    console.log(user, userId)
+    
+    if(type === "open" || type === "video") {
+        const quiz = await mongoose.connection.db.collection("quizzes").findOne({_id: "christmas-quiz"});
+        const question = quiz.questions.find(q => q.id === Number(day));
+
+        const result = await Answer.insertOne({student: userId, username: username, day: day, answer: answer, type: type, question: question.question})
+    } else if (type === "mc") {
+        const quiz = await mongoose.connection.db.collection("quizzes").findOne({_id: "christmas-quiz"});
+        const question = quiz.questions.find(q => q.id === Number(day));
+
+        const correct = answer.trim().toLowerCase() === question.correct_answer.toLowerCase();
+        
+        const result = await Answer.insertOne({student: userId, username: username, day: Number(day), answer: answer, correct: correct, type: type, question: question.question})
+    } 
 
 
     res.redirect("/")
