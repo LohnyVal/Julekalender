@@ -22,6 +22,8 @@ I dette julekalenderprosjektet har jeg brukt følgende teknologier:
 
 ## Installasjon: Hvordan kloner og installerer man prosjektet, og hvordan installeres nødvendige dependencies?
 
+Før man kan installere 
+
 
 ## Konfigurasjon: Hvilke miljøvariabler og innstillinger må være på plass?
 

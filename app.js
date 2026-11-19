@@ -6,6 +6,7 @@ require("dotenv").config();
 
 const User = require("./models/User");
 const Question = require("./models/Questions")
+const Answer = require("./models/Answer")
 
 
 const mongodb = mongoose.connect(process.env.MONGODB)
@@ -71,7 +72,6 @@ app.get("/calendar/:id", (req, res) =>{
 
         const quiz = await mongoose.connection.db.collection("quizzes").findOne({_id: "christmas-quiz"});
         const question = quiz.questions.find(q => q.id === id);
-
 
 
     
@@ -145,6 +145,41 @@ app.post("/registerUser", async (req, res) =>{
     res.cookie("token", token, {
         maxAge: 30 * 24 * 60 * 60 * 1000
     })
+
+
+    res.redirect("/")
+})
+
+
+
+app.post("/calendar/:id/:type", async (req, res) =>{
+    const {answer} = req.body;
+    console.log(answer)
+
+    const day = req.params.id;
+    const type = req.params.type;
+
+    console.log(type);
+    const token = req.cookies.token;
+    console.log(token, day)
+    const user = await jwt.decode(token);
+    const userId = user.id;
+    const username = user.username;
+    console.log(user, userId)
+    
+    if(type === "open" || type === "video") {
+        const quiz = await mongoose.connection.db.collection("quizzes").findOne({_id: "christmas-quiz"});
+        const question = quiz.questions.find(q => q.id === Number(day));
+
+        const result = await Answer.insertOne({student: userId, username: username, day: day, answer: answer, type: type, question: question.question})
+    } else if (type === "mc") {
+        const quiz = await mongoose.connection.db.collection("quizzes").findOne({_id: "christmas-quiz"});
+        const question = quiz.questions.find(q => q.id === Number(day));
+
+        const correct = answer.trim().toLowerCase() === question.correct_answer.toLowerCase();
+        
+        const result = await Answer.insertOne({student: userId, username: username, day: Number(day), answer: answer, correct: correct, type: type, question: question.question})
+    } 
 
 
     res.redirect("/")

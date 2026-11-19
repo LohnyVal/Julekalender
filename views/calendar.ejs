@@ -8,7 +8,7 @@
                     <h1><%= q.question %></h1>
                 </div>
                 <div class="calendar-multiple-bottom">
-                    <form action="/calendar/<%= id %>" method="post">
+                    <form action="/calendar/<%= id %>/mc" method="post">
                         <% q.options.forEach(btn =>{ %>
                             <button type="submit" name="answer" value="<%= btn %>"> <%= btn %></button>
                        <% }) %>
@@ -22,7 +22,7 @@
                     <h1><%= q.question %></h1>
                 </div>
                 <div class="calendar-open-bottom">
-                    <form action="/calendar/<%= id %>" method="post">
+                    <form action="/calendar/<%= id %>/open" method="post">
                         <textarea name="answer" required></textarea>
                         <button type="submit">Svar</button>
                     </form>
@@ -35,8 +35,8 @@
                     <h1><%= q.question %></h1>
                 </div>
                 <div class="calendar-video-bottom">
-                    <iframe src="<%= q.video_url.replace('watch?v=', 'embed/') %>" frameborder="0" allowfullscreen ></iframe>
-                    <form action="/calendar/<%= id %>" method="post">
+                    <iframe src="<%= q.video_url %>" frameborder="0" allowfullscreen ></iframe>
+                    <form action="/calendar/<%= id %>/video" method="post">
                         <textarea name="answer"  required></textarea>
                         <button type="submit">Svar</button>
                     </form>
