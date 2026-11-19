@@ -157,12 +157,15 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.33);
 }
 
-.user-results{
-    overflow-y: scroll;
+.answer-div-result {
+    height: 90%;
+    display: flex;
+    flex-direction: column;
 }
 
-
-
+.user-results {
+    overflow-y: auto;
+}
 
 
 @media (max-width: 600px){

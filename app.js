@@ -166,6 +166,16 @@ app.post("/calendar/:id/:type", async (req, res) =>{
     const userId = user.id;
     const username = user.username;
     console.log(user, userId)
+
+   const answerd = await Answer.findOne({
+        student: userId,
+        day: day
+    });
+    
+
+    if(answerd){
+        return res.send(`Du kan ikke svare flere ganger enn en gang per luke! Neste luke åpner ${Number(day) + 1} desember`)
+    }
     
     if(type === "open" || type === "video") {
         const quiz = await mongoose.connection.db.collection("quizzes").findOne({_id: "christmas-quiz"});
