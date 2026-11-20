@@ -27,6 +27,8 @@
 
 .register-form h1{
     font-size: 3rem;
+    text-decoration: none;
+    
 }
 
 .register-form div{
@@ -35,6 +37,39 @@
     width: 50%;
 }
 
-.register-form button{
+
+label{
+    font-size: 1.1rem;
+}
+
+input{
+    height: 60px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid black;
+
+}
+
+.register-button{
+    height: 45px;
     width: 50%;
+    border: none;
+    background-color: rgba(128, 128, 128, 0.683);
+    font-size: 1.3rem;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+
+
+@media (max-width: 600px){
+    .box{
+        width: 300px;
+        height: 600px,
+    }
+    .users-amount, .answers-amount, .awaits-correction, .day-count{
+        width: 100px;
+        height: 30px;
+    }
+    
 }

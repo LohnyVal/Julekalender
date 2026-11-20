@@ -25,6 +25,13 @@ h1{
     text-decoration: underline;
 }
 
+.user-guide-bottom{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 100%;
+}
 
 .user-guide-bottom div h2{
     text-decoration: underline;
@@ -44,4 +51,19 @@ h1{
     flex-direction: column;
     align-items: center;
     height: 20%;
+    max-width: 1000px;
+}
+
+
+
+@media (max-width: 600px){
+    .box{
+        width: 300px;
+        height: 600px,
+    }
+    .users-amount, .answers-amount, .awaits-correction, .day-count{
+        width: 100px;
+        height: 30px;
+    }
+    
 }

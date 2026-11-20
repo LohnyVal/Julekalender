@@ -56,8 +56,10 @@ nav{
    nav ul li a{
       font-size: 1rem;
    }
+   
    .usericon{
-      height: 40px;
-      width: 40px;
+      width: 10px;
+      height: 10px;
+      padding: 20px;
    }
 }

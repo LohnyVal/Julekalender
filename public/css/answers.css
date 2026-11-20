@@ -8,6 +8,7 @@
 
 .calendar-wrapper-video, .calendar-wrapper-multiple, .calendar-wrapper-open{
     overflow: hidden;
+    
 }
 
 .calendar-wrapper-multiple{
@@ -38,3 +39,15 @@ iframe{
     border-radius: 20px;
 }
 
+
+@media (max-width: 600px){
+    .box{
+        width: 300px;
+        height: 600px,
+    }
+    .users-amount, .answers-amount, .awaits-correction, .day-count{
+        width: 100px;
+        height: 30px;
+    }
+    
+}
