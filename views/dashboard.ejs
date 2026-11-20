@@ -3,8 +3,8 @@
     <%- include('partials/nav') %>
     <main class="dashboard-main">
         <div class="dashboard-top">
-            <h1>Dashboard</h1>
-            <h3>Hei, <%= username %></h3>
+            <h1 class="dashboardtitle">Dashboard</h1>
+            <h3 class="welcome-username">Hei, <%= username %></h3>
         </div>
         <div class="dashboard-middle">
             <div class="data-div box">
@@ -12,23 +12,26 @@
                     <h2>Oversikt</h2>
                 </div>
                 <div class="data-overview-div">
-                    <div class="users-amount">
-                        <h3><%= userCount %></h3>
-                        <p>Deltagere</p>
+                    <div class="row">
+                        <div class="users-amount">
+                            <h3><%= userCount %></h3>
+                            <p>Deltagere</p>
+                        </div>
+                        <div class="answers-amount">
+                            <h3>35</h3>
+                            <p>Antall svar</p>
+                        </div>
                     </div>
-                    <div class="answers-amount">
-                        <h3>35</h3>
-                        <p>Antall svar</p>
+                    <div class="row">
+                        <div class="awaits-correction">
+                            <h3>35</h3>
+                            <p>Venter svar</p>
+                        </div>
+                        <div class="day-count">
+                            <h3><%= today %></h3>
+                            <p>Luke</p>
+                        </div>
                     </div>
-                    <div class="awaits-correction">
-                        <h3>35</h3>
-                        <p>Venter svar</p>
-                    </div>
-                    <div class="day-count">
-                        <h3><%= today %></h3>
-                        <p>Luke</p>
-                    </div>
-                    
                 </div>
             </div>
 
@@ -39,7 +42,7 @@
                 <div class="answer-div-result">
                     <div class="user-results">
                         <% for(let i = 1; i <= 24; i++){ %>
-                            <a href="/answers/<%= i %>"><%= i %></a>
+                            <a href="/answers/<%= i %>" class="dashboard-calendar-box"><%= i %></a>
                        <% } %>
                     </div>
                 </div>

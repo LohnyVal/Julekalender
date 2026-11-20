@@ -1,5 +1,5 @@
-.dashboard-main{
-    height: 80vh;
+.dashboard-main {
+    min-height: 80vh;
     width: 100%;
 }
 
@@ -7,7 +7,6 @@
     display: flex;
     align-items: center;
     height: 10%;
-    /* background-color: white;  */
     justify-content: space-between;
 }
 
@@ -23,33 +22,27 @@
     color: white;
 }
 
-.dashboard-middle{
-    /* background-color: green; */
+.dashboard-middle {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 35px;
-    height: 90%;
     margin-top: 10px;
 }
 
 
 .box {
-  min-width: 800px;
-  box-sizing: border-box; 
-  background-color: white; 
-  border-radius: 10px; 
-  overflow-x: scroll;
+    flex: 1 1 500px;  
+    min-width: 0;  
+    max-width: 100%;
+    box-sizing: border-box;
+    background-color: white;
+    border-radius: 10px;
+    overflow-x: auto;  
 }
 
-.data-overview-div{
-    display: flex;
-    flex-direction: column;
-    
-}
 
 .data-div-top{
-    /* background-color: white; */
     height: 20%;
     display: flex;
     align-items: center;
@@ -57,19 +50,24 @@
 }
 
 
-
-.data-overview-div{
-    height: 60%;
+.data-overview-div {
     display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    /* background-color: orange; */
+    flex-direction: column;   
+    gap: 15px;
+    padding: 10px;
 }
 
-.users-amount, .answers-amount, .awaits-correction, .day-count{
-    background-color: rgba(0, 0, 0, 0.256);
-    min-width: 200px;
+.data-overview-div .row {
+    display: flex;        
+    gap: 15px;
+    justify-content: space-evenly;
+}
+
+.users-amount, .answers-amount, .awaits-correction, .day-count {
+    flex: 1;                 
+    min-width: 0;
     height: 100px;
+    background-color: rgba(0, 0, 0, 0.256);
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -80,6 +78,10 @@
 
 .data-div-top h2, .answer-div-top h2, .question-div-top h2, .pull-random-winner-div-top h2, .user-div-top h2{
     font-size: 2rem;
+}
+
+.answer-div-top h2{
+    text-align: center;
 }
 
 .data-div-top, .question-div-top, .pull-random-winner-div-top, .user-div-top{
@@ -141,42 +143,135 @@
     border-radius: 50%;
 }
 
-.result{
+
+.result,
+.result-div-info {
+    width: 100%;
+    box-sizing: border-box;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     gap: 20px;
-    margin-top: 20px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.331);
-    padding: 5px;
+    padding: 12px 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 }
 
 
-.result-div-info{
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.33);
+.result > *,
+.result-div-info > * {
+    flex: 1;
+    min-width: 0;     
+    margin: 0;
 }
+
+.result-div-info {
+    font-weight: 700;
+    background-color: rgba(0, 0, 0, 0.06);
+    border-radius: 8px;
+}
+
 
 .answer-div-result {
-    height: 90%;
-    display: flex;
-    flex-direction: column;
+    padding: 0 20px 20px;
 }
 
+body > .answer-div {
+    max-width: 1100px;
+    margin: 20px auto;
+}
+
+.result form {
+    display: flex;
+    gap: 8px;
+}
+
+
+
+
+
+
 .user-results {
-    overflow-y: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center; 
+    max-width: 100%;         
+}
+
+
+.dashboard-calendar-box {
+    flex: 0 0 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    color: white;
+    text-decoration: none;
+    font-size: 1.7rem;
+
+}
+
+.dashboard-calendar-box:nth-child(odd){
+    background-color: red;
+}
+
+.dashboard-calendar-box:nth-child(even){
+    border: 1px solid black;
+    color: black;
+}
+
+.dashboard-calendar-box:hover{
+    background-color: rgb(76, 16, 16);
 }
 
 
 @media (max-width: 600px){
     .box{
         width: 300px;
-        height: 600px,
+        height: 300px;
     }
-    .users-amount, .answers-amount, .awaits-correction, .day-count{
-        width: 100px;
-        height: 30px;
+
+    .data-overview-div .row .users-amount,
+    .data-overview-div .row .answers-amount,
+    .data-overview-div .row .awaits-correction,
+    .data-overview-div .row .day-count{
+        height: 60px;
+    }
+
+    .data-overview-div{
+        height: 200px;
+    }
+    .dashboard-top .dashboardtitle{
+        font-size: 2.5rem;
+    }
+    .dashboard-top .welcome-username{
+        font-size: 1.4rem;
     }
     
+    .box{
+        width: auto;     
+        height: auto;
+    }
+
+  
+    .result-div-info p{
+        display: none;
+    }
+    .result-div-info{
+        justify-content: center;
+    }
+
+    .result{
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+    .result > *{
+        flex: none;
+        width: 100%;
+    }
 }
+
+
+
