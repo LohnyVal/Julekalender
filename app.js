@@ -190,6 +190,10 @@ app.post("/registerUser", async (req, res) =>{
 })
 
 
+app.get("/userguide", (req, res) =>{
+    res.render("userguide")
+})
+
 
 app.post("/calendar/:id/:type", async (req, res) =>{
     const {answer} = req.body;
@@ -303,6 +307,9 @@ app.post("/winner/:day", async (req, res) =>{
     res.redirect(`/answers/${day}`)
     
 })
+
+
+
 
 
 //winner
