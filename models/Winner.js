@@ -10,3 +10,5 @@ const winnerSchema = new mongoose.Schema({
     },
 
 })
+
+module.exports = mongoose.model("Winner", winnerSchema)
