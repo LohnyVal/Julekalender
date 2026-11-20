@@ -7,6 +7,7 @@ require("dotenv").config();
 const User = require("./models/User");
 const Question = require("./models/Questions")
 const Answer = require("./models/Answer")
+const Winner = require("./models/Winner")
 
 
 const mongodb = mongoose.connect(process.env.MONGODB)
@@ -298,10 +299,23 @@ app.post("/winner/:day", async (req, res) =>{
         if(user.role !== "teacher"){
             return res.redirect("/")
         }
+
+        let username = user.username;
+
+        const get_right_answers = await Answer.find({correct: true, day: day, username: username});
+        let winner = Math.floor(Math.random() * get_right_answers.length);
+        let index = winner.toFixed(0);
+        let get_winner = get_right_answers[index]
+        
+        const winner_save = await Winner.insertOne({
+            day: day,
+            student: get_winner.student
+        })
+
+        
     })
 
-    const get_right_answers = await Answer.find({correct: true, day: day, username: username});
-    console.log(get_right_answers)
+    
     
 
     res.redirect(`/answers/${day}`)
@@ -312,10 +326,6 @@ app.post("/winner/:day", async (req, res) =>{
 
 
 
-//winner
-//winner/:day
-//hent ut alle riktige svar, lagrer studentid i en array, og velge ut en random id på alle som correct == true
-//kjør math.random på denne for å trekke en vinner
 //lagrer denne i databasen under model Winner
 
 

@@ -42,7 +42,7 @@ Før man kan klone og legge til "dependencies" som betyr avhengigheter, må man 
 - __Node__
 
  Sjekk git ved å skrive:
-```bash
+```bash 
 git --version
 ```
 Sjekk node og npm ved å skrive:
@@ -52,7 +52,8 @@ node --version
 ```bash
 npm --version
 ```
-OBS: Hvis man får opp feilmeldinger vil det si at git eller node ikke er installert
+OBS: Hvis man får opp feilmeldinger vil det si at git eller node ikke er installert.
+
 Nå som dette er gjort gjør man følgende:
 1. Åpme terminalen på pcen
 2. Skriv inn:
@@ -134,10 +135,6 @@ OBS: Admin kan også sende inn svar
 
 ## Videre utvikling: Hvilke funksjoner eller forbedringer kunne vært aktuelle å implementere senere?
 Det er en del funksjoner jeg ville ha lagt til som jeg ikke rakk i denne oppgen. Noen eksempler er å lage et filter svar funkjson som filterer alle svar som er riktige, feil eller venter verifisering av admin (lærer). Jeg ville også ha lagt på litt mer animasjoner for hvilke luker som var ferdig, hvilken luke man var på og fremtidlige luker. Jeg kunne ha forbedret utseende av applikasjonen for å gjøre admin siden litt mer morsom og fin. 
-
-
-
-
 
 
 
