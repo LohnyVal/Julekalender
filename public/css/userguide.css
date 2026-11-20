@@ -1,0 +1,28 @@
+.user-guide-main{
+    height: 94vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.user-guide-wrapper{
+    width: 70%;
+    height: 80%;
+    background-color: white;
+    border-radius: 20px;
+}
+
+.user-guide-top{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10%;
+    overflow-y: scroll;
+}
+
+
+
+.user-guide-how-to-use h2{
+    text-decoration: underline;
+}
