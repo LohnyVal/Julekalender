@@ -38,7 +38,7 @@ app.use((req, res, next) =>{
     })
 })
 
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
     const calendar_array = Array.from({length: 24}, (_, i) => i + 1);
     const today = new Date().getDate();
     res.render("index", {calendar_array, today})
@@ -159,6 +159,11 @@ app.get("/logout", (req, res) =>{
     res.redirect("/registerUser")
 })
 
+app.get("/userguide", (req, res) =>{
+    res.render("userguide")
+})
+
+
 
 app.post("/registerUser", async (req, res) =>{
     const {email} = req.body;
@@ -191,9 +196,6 @@ app.post("/registerUser", async (req, res) =>{
 })
 
 
-app.get("/userguide", (req, res) =>{
-    res.render("userguide")
-})
 
 
 app.post("/calendar/:id/:type", async (req, res) =>{
@@ -302,23 +304,24 @@ app.post("/winner/:day", async (req, res) =>{
 
         let username = user.username;
 
-        const get_right_answers = await Answer.find({correct: true, day: day, username: username});
+        const get_right_answers = await Answer.find({correct: true, day: day});
         let winner = Math.floor(Math.random() * get_right_answers.length);
         let index = winner.toFixed(0);
         let get_winner = get_right_answers[index]
         
         const winner_save = await Winner.insertOne({
             day: day,
-            student: get_winner.student
+            student: get_winner.student,
         })
 
-        
+        console.log(get_winner.username)
+
+        res.redirect(`/answers/${day}`)
+    
     })
 
     
-    
 
-    res.redirect(`/answers/${day}`)
     
 })
 

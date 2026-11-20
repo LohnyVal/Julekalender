@@ -33,6 +33,8 @@ I dette julekalenderprosjektet har jeg brukt følgende teknologier:
 - __GitHub Projects__ 
 - __linux-server__
 - __pm2__
+- __dotenv__
+
 
 
 ## Kloning og installerer prosjektet, hvordan installeres nødvendige dependencies og hvordan man starter applikasjonen i utviklingsmiljøet
@@ -75,7 +77,7 @@ npm install
 ```
 5. Når dette er gjort kan man gå inn på visual studio code(eller en selvvalgt programmerings program) og lage en fil som heter .env. .Env filen blir ikke med i github fordi den innholder hemmeligheter
 6. Legg inn disse i .env filen:
-- __MONGODB=mongodb-lenke__
+- __MONGODB="mongodb-lenke"__
 - __SECRET_JWT: en-lang-hemmelig-tekst__
 - __PORT:4000__
 
@@ -89,14 +91,26 @@ node seed.js
 nodemon app.js
 ```
 
-Da vil man få en bekreftelse fra serveren som ser slik ut:
+Da vil man få en bekreftelse fra serveren at den er på som ser slik ut:
 ![Server forteller at den er aktiv og injecter variablene fra .env](/public/img/image_for_readme.png)
 
 
 
 
 ## Konfigurasjon: Hvilke miljøvariabler og innstillinger må være på plass?
-- ???
+Innstillinger:
+- MongoDB kobling via lenke
+- SECRET_JWT token slik at rollen til brukeren blir verifisert ved bruk av samme nøkkel når man signerte tokenet
+- Cookie-parser for å kunne lese cookies fra forspørsler fra webapplikasjonen
+- express.urlencoded({extended:true}) for hvordan express serveen tolker html-skjemaer (forms)
+- view engine, ejs som er hvilken visningsmotor express serveren bruker
+
+Miljøvaiabler:
+- MONGODB med en koblink til MongoDB compass
+- SECRET_JWT en hemmelig nøkkel for jsonwebtoken verifisering
+- PORT et portnummer express serveren lytter til 
+
+
 
 
 ## Database: Hvordan er databasen organisert, og hvilke data lagres?
@@ -114,6 +128,65 @@ I prosjketet bruker jeg mongoose schema for å lage modellene
 
 ## Utrulling: Hvordan settes løsningen opp på Linux-serveren?
 
+Det er steg for steg veiledning for hvordan man ruller ut løsningen på linux server:
+__OBS__: Må ha VM (virtual machine) satt opp før man følger denne veiledningen
+Steg for steg:
+1. Logg inn på VM gjennom ssh
+2. Installer nginx ved å skrive:
+```bash
+sudo apt install nginx
+```
+3. Gå til /var, dertter /www som ble laget når nginx ble installert
+```bash
+cd /var
+```
+
+```bash
+cd www
+```
+4. Lag en mappe med et navn som man selv velger. (Må lages med sudo)
+```bash
+sudo mkdir mappenavn
+```
+5. Gå inn på mappen og skriv git init for intialisere git:
+```bash
+git init
+```
+6. Deretter heter man git repository url og skriver git pull https://github.com/brukernavn/repository-navn
+```bash
+git pull https://github.com/brukernavn/repository-navn
+```
+
+7. Skriv også git remote add origin https://github.com/brukernavn/repository-navn
+```bash
+git remote add origin https://github.com/brukernavn/repository-navn
+```
+8. Deretter skriver man inn sudo npm i for installere alle pakkende i json.package
+```bash
+sudo npm i 
+```
+9. Hvis det ikke gikk må du laste ned node.js ved å skrive sudo apt install nodejs og sudo apt install npm
+```bash
+sudo apt install nodejs
+```
+```bash
+sudo apt install npm
+```
+10. Dertter prøv igjen med npm i
+11. Last ned mongodb og følg instruksene der
+12. Skriv nå sudo systemctl start mongod. Da bør mongodb være aktiv
+13. Last ned pm2 globalt ved å skrive npm i pm2 -g
+```bash
+npm i pm2 -g
+```
+14. Siste steg er å starte pm2 ved å skrive pm2 start app.js
+```bash
+pm2 start app.js
+```
+og sjekk om den er aktiv ved å skrive pm2 logs app
+```bash
+pm2 logs app
+```
 
 
 ## Brukerveiledning: Hvordan bruker man julekalenderen og eventuelle administrasjonsfunksjoner?
@@ -126,9 +199,9 @@ Steg for steg for bruk av julekalenderen som en deltaker:
 Steg for steg for bruk av julekalender som en administartor (lærer):
 OBS: Admin kan også sende inn svar
 1. Når en persom logger seg inn som admin, altså lærere med admin rolle, vil de også bli sendt til julekalender siden etter registering
-2. Deretter gåt man inn til dashboard og vil ble da sendt til dashboard siden hvor man kan adminsitrere svar, vinnere og ser alle brukerene på webapplikasjonen.
-3. Nå som man har kommet til siden vil man som admin først gå igjennom svarene til deltakerene (elevene) for å verifisere deres svar. 
-4. Deretter når alle svar har blitt svart på, skal admin trykke på en knapp som vil generere en tilfeldig vinner. Da vil navnet til den personen vises på den luken den eleven vant i. 
+2. Deretter går man inn til dashboard og vil ble da sendt til dashboard siden hvor man kan adminsitrere svar, vinnere og se alle brukerene på webapplikasjonen.
+3. For å registrere svar på man trykke på dashbaord lukene og se svareen for hver luke og trykke på de som er riktige eller feil
+5. I samme side hvor man verifiserer rikitg eller galt kan man trekke en tilfeldig vinner for den luken
 
 
 
