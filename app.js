@@ -45,15 +45,15 @@ app.get("/", (req, res) => {
 
 app.get("/calendar/:id", (req, res) =>{
 
-    const day = Number(req.params.id);
-    const today = new Date().getDate();
+    // const day = Number(req.params.id);
+    // const today = new Date().getDate();
     
-    if(day < today){
-        return res.send("Kan ikke åpne tidligere uker!")
-    }
-    if(day > today){
-        return res.send("Kan ikke åpne fremtidige luker")
-    }
+    // if(day < today){
+    //     return res.send("Kan ikke åpne tidligere uker!")
+    // }
+    // if(day > today){
+    //     return res.send("Kan ikke åpne fremtidige luker")
+    // }
 
     const token = req.cookies.token;
     if(!token){
@@ -78,6 +78,45 @@ app.get("/calendar/:id", (req, res) =>{
         res.render("calendar", {id, username: payload.username, q:question})
     });
 })
+app.get("/answers/:id", async (req, res) =>  {
+
+    const token = req.cookies.token;
+    const today = new Date().getDate()
+
+    let id = req.params.id;
+    id = Number(id);
+
+    if (!token) {
+        return res.redirect("/")
+    }
+
+    jwt.verify(token, process.env.SECRET_JWT, async (err, payload) => {
+        if (err) {
+            return res.redirect("/")
+        }
+
+        const user = await User.findById(payload.id).select("username role");
+        if (!user) {
+            return res.redirect("/");
+        }
+
+        if(user.role !== "teacher"){
+            return res.redirect("/")
+        }
+    
+    
+
+    const answers = await Answer.find({day: id})
+
+
+    res.render("answers", {answers, day: id});
+    })
+
+
+})
+
+
+
 
 
 app.get("/registerUser", (req, res) =>{
@@ -194,6 +233,84 @@ app.post("/calendar/:id/:type", async (req, res) =>{
 
     res.redirect("/")
 })
+
+
+app.post("/question/:id/:day", async (req, res) =>{
+    const {result} = req.body;
+    const day = req.params.day;
+    const id = req.params.id;
+    const token = req.cookies.token;
+
+console.log(result);
+    if (!token) {
+        return res.redirect("/")
+    }
+
+    jwt.verify(token, process.env.SECRET_JWT, async (err, payload) => {
+        if (err) {
+            return res.redirect("/")
+        }
+
+        const user = await User.findById(payload.id).select("username role");
+        if (!user) {
+            return res.redirect("/");
+        }
+
+        if(user.role !== "teacher"){
+            return res.redirect("/")
+        }
+    })
+
+    const correct = await Answer.findByIdAndUpdate(
+        id,
+        {
+            correct: result
+        }
+    )
+
+    res.redirect(`/answers/${day}`)
+
+})
+
+
+app.post("/winner/:day", async (req, res) =>{
+    const day = req.params.day;
+    const correct_array = [];
+    const token = req.cookies.token;
+    if (!token) {
+        return res.redirect("/")
+    }
+
+    jwt.verify(token, process.env.SECRET_JWT, async (err, payload) => {
+        if (err) {
+            return res.redirect("/")
+        }
+
+        const user = await User.findById(payload.id).select("username role");
+        if (!user) {
+            return res.redirect("/");
+        }
+
+        if(user.role !== "teacher"){
+            return res.redirect("/")
+        }
+    })
+
+    const get_right_answers = await Answer.find({correct: true, day: day, username: username});
+    console.log(get_right_answers)
+    
+
+    res.redirect(`/answers/${day}`)
+    
+})
+
+
+//winner
+//winner/:day
+//hent ut alle riktige svar, lagrer studentid i en array, og velge ut en random id på alle som correct == true
+//kjør math.random på denne for å trekke en vinner
+//lagrer denne i databasen under model Winner
+
 
 
 app.listen(process.env.PORT);

@@ -28,6 +28,7 @@
                         <h3><%= today %></h3>
                         <p>Luke</p>
                     </div>
+                    
                 </div>
             </div>
 
@@ -36,65 +37,12 @@
                     <h2>Innsendte svar</h2>
                 </div>
                 <div class="answer-div-result">
-                    <div class="filter-options-div">
-                        <form action="" method="post">
-                            <select name="filter" id="filter">
-                                <option value="all">Alle</option>
-                                <option value="correct">Riktig</option>
-                                <option value="wrong">Feil</option>
-                                <option value="awaits">Venter</option>
-                            </select>
-                            <select name="days" id="">
-                            <% for (let i = 0; i < 24; i++) { %>
-                                <option value="<%= i %>"><%= i + 1 %></option>
-                            <% } %>
-                            </select>
-                        </form>
-                    </div>
                     <div class="user-results">
-                        <div class="result-div-info">
-                            <p>Bruker</p>
-                            <p>Luke</p>
-                            <p>Spørsmål</p>
-                            <p>Svar</p>
-                            <p>Resultat</p>
-                        </div>
-                        <% answers.forEach(a => { %>
-                            <div class="result">
-                                <h3><%= a.username %></h3>
-                                <p class="day-text"><%= a.day %></p>
-                                <p><%= a.question %></p>
-                                <p><%= a.answer %></p>
-
-                                <% if (a.type === "mc") { %>
-                                    <% if (a.correct == true) { %>
-                                        <p class="correct">Riktig</p>
-                                    <% } else if(a.correct === false) { %>
-                                        <p class="wrong">Feil</p>
-                                    <% } %>
-                                <% } else if(a.type === "video" || a.type === "open") { %>
-                                    <form action="" method="post">
-                                        <button name="result" value="true">Riktig</button>
-                                        <button name="result" value="false">Feil</button>
-                                    </form>
-                                <% } %>
-                            </div>
-                        <% }) %>
+                        <% for(let i = 1; i <= 24; i++){ %>
+                            <a href="/answers/<%= i %>"><%= i %></a>
+                       <% } %>
                     </div>
                 </div>
-            </div>
-
-            <div class="pull-random-winner-div box">
-                <div class="pull-random-winner-div-top">
-                    <h2>Trekk vinner</h2>
-                </div>
-                <div class="pull-random-winner">
-                   <form action="" method="post">
-                    <h3>Trekk en tilfeldig vinner</h3>
-                    <button>Trekk</button>
-                   </form>
-                </div>
-                
             </div>
             <div class="user-list-div box">
                 <div class="user-div-top">

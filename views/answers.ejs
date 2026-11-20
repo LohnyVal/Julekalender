@@ -1,0 +1,50 @@
+<%- include('partials/head') %>
+<body>
+    <%- include('partials/nav') %>
+    <div class="answer-div box">
+        <div class="answer-div-top">
+            <h2>Innsendte svar</h2>
+        </div>
+        <div class="answer-div-result">
+            <div class="user-results">
+                <div class="result-div-info">
+                    <p>Bruker</p>
+                    <p>Luke</p>
+                    <p>Spørsmål</p>
+                    <p>Svar</p>
+                    <p>Resultat</p>
+                    <form action="/winner/<%= day %>" method="post">
+                        <button>Trekk vinner</button>
+                    </form>
+                </div>
+                <% answers.forEach(a => { %>
+                    <div class="result">
+                        <h3><%= a.username %></h3>
+                        <p class="day-text"><%= a.day %></p>
+                        <p><%= a.question %></p>
+                        <p><%= a.answer %></p>
+    
+                        <% if (a.type === "mc") { %>
+                            <% if (a.correct == true) { %>
+                                <p class="correct">Riktig</p>
+                            <% } else if(a.correct === false) { %>
+                                <p class="wrong">Feil</p>
+                            <% } %>
+                        <% } else if(a.type === "video" || a.type === "open") { %>
+                            <% if(a.correct === undefined){ %>
+                            <form action="/question/<%-a._id%>/<%-day%>" method="post">
+                                    <button name="result" value="true">Riktig</button>
+                                    <button name="result" value="false">Feil</button>
+                                </form>
+                                <%    } else  { %>
+                                <p class="wrong"><%= a.correct %></p>
+                            <% } %>
+                        <% } %>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+    
+</body>
+            
