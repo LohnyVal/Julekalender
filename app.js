@@ -46,16 +46,6 @@ app.get("/", async (req, res) => {
 
 app.get("/calendar/:id", (req, res) =>{
 
-    // const day = Number(req.params.id);
-    // const today = new Date().getDate();
-    
-    // if(day < today){
-    //     return res.send("Kan ikke åpne tidligere uker!")
-    // }
-    // if(day > today){
-    //     return res.send("Kan ikke åpne fremtidige luker")
-    // }
-
     const token = req.cookies.token;
     if(!token){
         return res.redirect("/registerUser");
@@ -74,9 +64,12 @@ app.get("/calendar/:id", (req, res) =>{
         const quiz = await mongoose.connection.db.collection("quizzes").findOne({_id: "christmas-quiz"});
         const question = quiz.questions.find(q => q.id === id);
 
+        const winner = await Winner.findOne({day: id});  
+        const get_winner_username = winner ? winner.username : null
+
 
     
-        res.render("calendar", {id, username: payload.username, q:question})
+        res.render("calendar", {id, username: payload.username, q:question, get_winner: get_winner_username})
     });
 })
 app.get("/answers/:id", async (req, res) =>  {
@@ -104,10 +97,7 @@ app.get("/answers/:id", async (req, res) =>  {
         if(user.role !== "teacher"){
             return res.redirect("/")
         }
-    
-    
-
-    const answers = await Answer.find({day: id})
+    const answers = await Answer.find({day: id});
 
 
     res.render("answers", {answers, day: id});
@@ -148,8 +138,9 @@ app.get("/dashboard", async (req, res) => {
         const userCount = await User.countDocuments({role: {$ne: "teacher"}});
         const users = await User.find().select("username email role").lean();
         const answers = await mongoose.connection.db.collection("answers").find().toArray();
+        const answers_amount = await Answer.countDocuments()
 
-        res.render("dashboard", { userCount, users, username: user.username, today, answers });
+        res.render("dashboard", { userCount, users, username: user.username, today, answers, answers_amount });
     })
 })
 
@@ -200,18 +191,13 @@ app.post("/registerUser", async (req, res) =>{
 
 app.post("/calendar/:id/:type", async (req, res) =>{
     const {answer} = req.body;
-    console.log(answer)
 
     const day = req.params.id;
     const type = req.params.type;
-
-    console.log(type);
     const token = req.cookies.token;
-    console.log(token, day)
     const user = await jwt.decode(token);
     const userId = user.id;
     const username = user.username;
-    console.log(user, userId)
 
    const answerd = await Answer.findOne({
         student: userId,
@@ -248,7 +234,6 @@ app.post("/question/:id/:day", async (req, res) =>{
     const id = req.params.id;
     const token = req.cookies.token;
 
-console.log(result);
     if (!token) {
         return res.redirect("/")
     }
@@ -282,7 +267,6 @@ console.log(result);
 
 app.post("/winner/:day", async (req, res) =>{
     const day = req.params.day;
-    const correct_array = [];
     const token = req.cookies.token;
     if (!token) {
         return res.redirect("/")
@@ -305,32 +289,29 @@ app.post("/winner/:day", async (req, res) =>{
         let username = user.username;
 
         const get_right_answers = await Answer.find({correct: true, day: day});
+
+        if(get_right_answers.length === 0){
+            return res.redirect(`/answers/${day}`)
+        }
+
         let winner = Math.floor(Math.random() * get_right_answers.length);
         let index = winner.toFixed(0);
         let get_winner = get_right_answers[index]
+
+        let winner_username = get_winner.username
         
         const winner_save = await Winner.insertOne({
             day: day,
             student: get_winner.student,
+            username: winner_username
         })
-
-        console.log(get_winner.username)
+ 
 
         res.redirect(`/answers/${day}`)
     
     })
 
     
-
-    
 })
-
-
-
-
-
-//lagrer denne i databasen under model Winner
-
-
 
 app.listen(process.env.PORT);

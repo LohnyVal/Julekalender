@@ -157,6 +157,23 @@
 }
 
 
+.draw_winner_form{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+
+.draw_winner_form button{
+    width: 33%;
+    height: 50px;
+    border-radius: 10px;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
 .result > *,
 .result-div-info > * {
     flex: 1;
@@ -222,7 +239,15 @@ body > .answer-div {
 }
 
 .dashboard-calendar-box:hover{
-    background-color: rgb(76, 16, 16);
+
+    border: 1px solid black;
+    font-size: 0;
+    color: black;
+}
+
+.dashboard-calendar-box:hover::after{
+    content: "Åpne";
+    font-size: 1.3rem;
 }
 
 
