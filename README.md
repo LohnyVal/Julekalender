@@ -116,9 +116,9 @@ Miljøvaiabler:
 ## Database: Hvordan er databasen organisert, og hvilke data lagres?
 Julekalender prosjketet bruker MongoDB som databasesystem. Denne databsen er organsiert med flere collections (modeller). 
 De modellene jeg bruker i prosjketet mitt er følgende:
-- Users: Lagrer informasjon om brukeren som email og et brukernavn basert på mailen
-- Quizzes: Er sprøsmål satt inn i MongoDB via seeding fra seed.js som kjører et script for å legge in spørsmål til databasen
-- Answers: Lagrer alle deltakeres svar, brukernavn, spørsmål og hvilke dag det var
+- __Users:__ Lagrer informasjon om brukeren som email og et brukernavn basert på mailen
+- __Quizzes:__ Er sprøsmål satt inn i MongoDB via seeding fra seed.js som kjører et script for å legge in spørsmål til databasen
+- __Answers:__ Lagrer alle deltakeres svar, brukernavn, spørsmål og hvilke dag det var
 
 I prosjketet bruker jeg mongoose schema for å lage modellene
 
@@ -191,7 +191,7 @@ pm2 logs app
 
 ## Brukerveiledning: Hvordan bruker man julekalenderen og eventuelle administrasjonsfunksjoner?
 Steg for steg for bruk av julekalenderen som en deltaker:
-1. Det første man ser er julekalenderen. Når man trykker på en luke for første gang vil man bli sendt til en register bruker side hvor man som bruker må skive inn din personlige skole mail som har @afk i seg. 
+1. Det første man ser er julekalenderen. Når man trykker på en luke for første gang eller ikke er logget inn vil man bli sendt til en register bruker side hvor man som bruker må skive inn din personlige skole mail som har @afk i seg. 
 2. Nå vil man ble sendt tilbake til kalenderen og kan nå trykke på en dagns luke. Man vil ikke kunne åpne en tidligere eller senere luke enn den dagen man er på. 
 3. Når man har ankommet spørsmål siden kan man nå svare på et spørsmål. Det er 3 forskjellige type spørsmål typer som man kan få. Det er enten flervalg spørsmål, video eller et åpent sprøsmål. På flervalg velger man en avd alternativene, mens på video og det åpne sprøsmålet må du skrive inn svaret selv. 
 4. Nå så man har sent inn et svar vil man dagen etter vite hvem som har vunnet den dagen (luken) og dette ser man ved å gå tilbake på luken hvor navnet til den personen som vant vil bli vist. 
@@ -201,7 +201,7 @@ OBS: Admin kan også sende inn svar
 1. Når en persom logger seg inn som admin, altså lærere med admin rolle, vil de også bli sendt til julekalender siden etter registering
 2. Deretter går man inn til dashboard og vil ble da sendt til dashboard siden hvor man kan adminsitrere svar, vinnere og se alle brukerene på webapplikasjonen.
 3. For å registrere svar på man trykke på dashbaord lukene og se svareen for hver luke og trykke på de som er riktige eller feil
-5. I samme side hvor man verifiserer rikitg eller galt kan man trekke en tilfeldig vinner for den luken
+5. I samme side hvor man verifiserer rikitg eller galt kan man trekke en tilfeldig vinner for den luken og se vinneren i hoved luken på hjemmesiden
 
 
 

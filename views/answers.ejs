@@ -13,9 +13,6 @@
                     <p>Spørsmål</p>
                     <p>Svar</p>
                     <p>Resultat</p>
-                    <form action="/winner/<%= day %>" method="post">
-                        <button>Trekk vinner</button>
-                    </form>
                 </div>
                 <% answers.forEach(a => { %>
                     <div class="result">
@@ -43,6 +40,9 @@
                     </div>
                 <% }) %>
             </div>
+            <form action="/winner/<%= day %>" method="post" class="draw_winner_form">
+                <button>Trekk vinner</button>
+            </form>
         </div>
     </div>
     

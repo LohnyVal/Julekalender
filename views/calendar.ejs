@@ -6,6 +6,9 @@
             <div class="calendar-wrapper-multiple">
                 <div class="calendar-multiple-top">
                     <h1><%= q.question %></h1>
+                    <% if(get_winner){ %>
+                            <h2>Gratulerer: <%= get_winner %></h2>
+                    <%  } %>
                 </div>
                 <div class="calendar-multiple-bottom">
                     <form action="/calendar/<%= id %>/mc" method="post">
@@ -13,6 +16,7 @@
                             <button type="submit" name="answer" value="<%= btn %>"> <%= btn %></button>
                        <% }) %>
                     </form>
+                     <a href="/">Tilbake</a>
                 </div>
             </div>
         <% } %>
@@ -20,12 +24,16 @@
             <div class="calendar-wrapper-open">
                 <div class="calendar-open-top">
                     <h1><%= q.question %></h1>
+                    <% if(get_winner){ %>   
+                        <h2>Gratulerer: <%= get_winner %></h2>
+                  <%  } %>
                 </div>
                 <div class="calendar-open-bottom">
                     <form action="/calendar/<%= id %>/open" method="post">
                         <textarea name="answer" required></textarea>
                         <button type="submit">Svar</button>
                     </form>
+                     <a href="/">Tilbake</a>
                 </div>
             </div>
         <% } %>
@@ -33,13 +41,17 @@
             <div class="calendar-wrapper-video">
                 <div class="calendar-video-top">
                     <h1><%= q.question %></h1>
+                    <% if(get_winner){ %>
+                        <h2>Gratulerer: <%= get_winner %></h2>
+                  <%  } %>
                 </div>
                 <div class="calendar-video-bottom">
-                    <iframe src="<%= q.video_url %>" frameborder="0" allowfullscreen ></iframe>
+                    <iframe src="<%= q.video_url.replace('watch?v=', 'embed/')%>" frameborder="0" allowfullscreen></iframe>
                     <form action="/calendar/<%= id %>/video" method="post">
                         <textarea name="answer"  required></textarea>
                         <button type="submit">Svar</button>
                     </form>
+                    <a href="/">Tilbake</a>
                 </div>
             </div>
         <% } %>
